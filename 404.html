@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página não encontrada | Elisângela Jeane</title>
+    <meta name="description" content="A página que você procura não existe ou foi movida." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/jpeg" href="img.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=Inter:wght@200;300;400;500;600&display=swap">
+
+    <style>
+        :root {
+            --base: #FAF6F4;
+            --rosa-claro: #F3E4E5;
+            --rosa-medio: #E4C4C7;
+            --acento: #B87A83;
+            --vinho: #5C2A31;
+            --texto: #3A322F;
+            --suave: #8C7E7A;
+            --font-titulo: "Cormorant Garamond", serif;
+            --font-corpo: "Inter", sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            background: linear-gradient(120deg, var(--rosa-claro) 0%, var(--base) 75%);
+            color: var(--texto);
+            font-family: var(--font-corpo);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--acento);
+            outline-offset: 3px;
+        }
+
+        .conteudo {
+            max-width: 560px;
+        }
+
+        .codigo {
+            font-family: var(--font-titulo);
+            font-size: 6rem;
+            font-weight: 600;
+            color: var(--vinho);
+            line-height: 1;
+        }
+
+        h1 {
+            font-family: var(--font-titulo);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--vinho);
+            margin: 20px 0 16px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--suave);
+            margin-bottom: 32px;
+        }
+
+        .botao-primario {
+            display: inline-block;
+            padding: 16px 38px;
+            background-color: var(--vinho);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 600;
+            letter-spacing: .6px;
+            transition: background-color .4s ease, transform .4s ease;
+        }
+
+        .botao-primario:hover {
+            background-color: var(--acento);
+            transform: translateY(-2px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .botao-primario {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="codigo">404</div>
+        <h1>Página não encontrada</h1>
+        <p>
+            A página que você está procurando não existe ou foi movida.
+            Volte para conhecer o método de Análise Corporal com Elisângela Jeane.
+        </p>
+        <a href="/" class="botao-primario">Voltar ao início</a>
+    </div>
+</body>
+
+</html>
