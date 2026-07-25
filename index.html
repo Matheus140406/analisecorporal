@@ -306,14 +306,11 @@
                 </div>
 
                 <div class="footer-col contato">
-                    <h4 class="col-label">Contato</h4>
+                    <h4 class="col-label">Atendimento</h4>
                     <ul class="nav-list">
-                        <li>
-                            <a href="https://wa.me/5561991633033" target="_blank" rel="noopener noreferrer">
-                                WhatsApp: (61) 99163-3033
-                            </a>
-                        </li>
-                        <li>Atendimento online ou presencial</li>
+                        <li>Consultas online ou presenciais</li>
+                        <li>Sessões de 60 a 90 minutos</li>
+                        <li>Resposta em até 24h úteis</li>
                     </ul>
                 </div>
 
@@ -327,6 +324,14 @@
         </div>
 
     </footer>
+
+    <a href="https://wa.me/5561991633033" class="whatsapp-bolha" target="_blank" rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true">
+            <path
+                d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.36.656 4.566 1.795 6.45L3 29l7.238-2.257A12.44 12.44 0 0 0 16 28.5C22.905 28.5 28.5 22.904 28.5 16 28.5 9.096 22.905 3 16.001 3Zm0 22.7a10.16 10.16 0 0 1-5.18-1.417l-.372-.22-4.293 1.339 1.36-4.187-.242-.386A10.14 10.14 0 0 1 5.7 15.5C5.7 9.804 10.305 5.2 16.001 5.2c5.696 0 10.3 4.604 10.3 10.3 0 5.696-4.604 10.2-10.3 10.2Zm5.633-7.66c-.309-.155-1.827-.902-2.111-1.005-.283-.104-.489-.155-.695.155-.206.31-.798 1.005-.978 1.211-.18.207-.36.232-.669.078-.309-.155-1.304-.48-2.484-1.53-.918-.818-1.538-1.829-1.718-2.138-.18-.31-.019-.477.136-.63.14-.14.309-.362.463-.543.155-.181.206-.31.309-.517.103-.207.052-.388-.026-.543-.077-.155-.695-1.67-.952-2.288-.251-.601-.506-.52-.695-.53l-.593-.01c-.206 0-.542.077-.826.388-.283.31-1.082 1.057-1.082 2.577 0 1.52 1.108 2.988 1.262 3.194.155.207 2.182 3.33 5.286 4.671.738.319 1.314.51 1.763.652.741.236 1.415.203 1.948.123.594-.088 1.827-.747 2.085-1.469.257-.723.257-1.343.18-1.47-.077-.129-.283-.207-.592-.362Z" />
+        </svg>
+    </a>
 
 </body>
 
@@ -1092,9 +1097,21 @@
     /* ================= FOOTER ================= */
 
     .site-footer-premium {
-        background: linear-gradient(180deg, var(--vinho), #431e23);
+        background: linear-gradient(165deg, var(--vinho) 0%, #3d1a1f 100%);
         color: #EADCDA;
-        padding: 100px 0 40px 0;
+        padding: 110px 0 36px 0;
+        position: relative;
+    }
+
+    .site-footer-premium::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--rosa-medio), transparent);
+        opacity: .5;
     }
 
     .footer-wrapper {
@@ -1105,93 +1122,114 @@
 
     .footer-header {
         padding-bottom: 30px;
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto;
     }
 
     .cta-tag {
-        font-size: .85rem;
-        letter-spacing: 1.5px;
+        font-size: .8rem;
+        letter-spacing: 2.5px;
         color: var(--rosa-medio);
         text-transform: uppercase;
+        font-weight: 600;
     }
 
     .cta-title {
         font-family: var(--font-titulo);
-        font-size: 2.4rem;
+        font-size: 2.5rem;
         font-weight: 600;
-        margin: 12px 0 20px 0;
+        margin: 14px 0 24px 0;
         color: #ffffff;
+        line-height: 1.2;
     }
 
     .cta-link {
-        color: var(--rosa-medio);
+        display: inline-block;
+        color: var(--vinho);
+        background: var(--rosa-medio);
         font-weight: 600;
         text-decoration: none;
-        font-size: 1rem;
-        letter-spacing: .4px;
-        border-bottom: 1px solid transparent;
-        transition: border-color .35s ease, opacity .35s ease;
+        font-size: .95rem;
+        letter-spacing: .5px;
+        padding: 14px 34px;
+        border-radius: 3px;
+        transition: background-color .4s cubic-bezier(.22,.61,.36,1), transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease;
     }
 
-    .cta-link:hover {
-        border-bottom: 1px solid var(--rosa-medio);
-        opacity: .9;
+    .cta-link:hover,
+    .cta-link:focus-visible {
+        background-color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
     }
 
     .footer-divider {
         height: 1px;
         width: 100%;
-        background: linear-gradient(90deg, transparent, rgba(228, 196, 199, 0.35), transparent);
-        margin: 36px 0;
+        background: linear-gradient(90deg, transparent, rgba(228, 196, 199, 0.25), transparent);
+        margin: 44px 0;
     }
 
     .footer-content {
         display: grid;
         grid-template-columns: 1.6fr 1fr 1fr;
-        gap: 40px;
+        gap: 48px;
     }
 
     .brand {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-    }
-
-    .brand-text {
-        max-width: 320px;
+        gap: 10px;
     }
 
     .logo-main {
         font-family: var(--font-titulo);
-        font-size: 1.8rem;
+        font-size: 1.7rem;
         color: #ffffff;
         letter-spacing: .5px;
     }
 
     .brand-text {
-        color: rgba(234, 220, 218, 0.75);
-        font-size: .95rem;
+        color: rgba(234, 220, 218, 0.65);
+        font-size: .92rem;
+        line-height: 1.7;
+        max-width: 320px;
     }
 
     .col-label {
-        font-family: var(--font-titulo);
-        font-size: 1.2rem;
-        color: #ffffff;
+        font-family: var(--font-corpo);
+        font-size: .8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--rosa-medio);
+        margin-bottom: 18px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .col-label::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 28px;
+        height: 2px;
+        background: rgba(228, 196, 199, 0.4);
+        border-radius: 2px;
+    }
+
+    .nav-list li {
+        color: rgba(234, 220, 218, 0.65);
+        font-size: .92rem;
         margin-bottom: 12px;
     }
 
-    .nav-list li {
-        margin-bottom: 8px;
-    }
-
-    .nav-list li {
-        color: #EADCDA;
-        font-size: .95rem;
-    }
-
     .nav-list a {
-        color: #EADCDA;
+        color: rgba(234, 220, 218, 0.85);
         text-decoration: none;
-        font-size: .95rem;
+        font-size: .92rem;
         transition: color .35s cubic-bezier(.22,.61,.36,1), padding-left .35s cubic-bezier(.22,.61,.36,1);
         display: inline-block;
         position: relative;
@@ -1204,9 +1242,9 @@
     }
 
     .footer-base {
-        margin-top: 44px;
+        margin-top: 48px;
         padding-top: 24px;
-        border-top: 1px solid rgba(234, 220, 218, 0.15);
+        border-top: 1px solid rgba(234, 220, 218, 0.12);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1215,8 +1253,8 @@
 
     .footer-base p {
         margin: 5px 0;
-        color: rgba(234, 220, 218, 0.7);
-        font-size: .9rem;
+        color: rgba(234, 220, 218, 0.55);
+        font-size: .85rem;
     }
 
     .signature .highlight {
@@ -1240,7 +1278,12 @@
 
     @media (max-width: 650px) {
         .site-footer-premium {
-            padding: 70px 0 30px 0;
+            padding: 80px 0 30px 0;
+        }
+
+        .footer-header {
+            text-align: left;
+            padding: 0 4px 30px;
         }
 
         .cta-title {
@@ -1249,13 +1292,77 @@
 
         .footer-content {
             grid-template-columns: 1fr;
-            gap: 25px;
+            gap: 32px;
         }
 
         .footer-base {
             flex-direction: column;
             text-align: center;
             gap: 4px;
+        }
+    }
+
+    /* ================= WHATSAPP BOLHA ================= */
+
+    .whatsapp-bolha {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: #25D366;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+        z-index: 1500;
+        transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;
+    }
+
+    .whatsapp-bolha::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: #25D366;
+        opacity: .55;
+        animation: pulso-whatsapp 2.4s ease-out infinite;
+        z-index: -1;
+    }
+
+    .whatsapp-bolha:hover,
+    .whatsapp-bolha:focus-visible {
+        transform: scale(1.08);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+    }
+
+    @keyframes pulso-whatsapp {
+        0% {
+            transform: scale(1);
+            opacity: .45;
+        }
+
+        100% {
+            transform: scale(1.7);
+            opacity: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .whatsapp-bolha {
+            right: 16px;
+            bottom: 16px;
+            width: 52px;
+            height: 52px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .whatsapp-bolha::before {
+            animation: none;
+            opacity: 0;
         }
     }
 
