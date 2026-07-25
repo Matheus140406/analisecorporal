@@ -20,9 +20,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=Inter:wght@200;300;400;500;600&display=swap">
+
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 </head>
 
 <body>
+    <div class="scroll-progresso" id="scroll-progresso" aria-hidden="true"></div>
     <header id="topo">
         <nav class="container">
             <a href="#topo" class="logo">
@@ -49,6 +53,8 @@
         </nav>
     </header>
     <section id="hero" class="hero" aria-labelledby="titulo-hero">
+        <div class="hero-forma hero-forma-1" data-parallax="0.15" aria-hidden="true"></div>
+        <div class="hero-forma hero-forma-2" data-parallax="0.3" aria-hidden="true"></div>
         <div class="container">
             <div class="hero-texto">
                 <h1 id="titulo-hero">
@@ -67,12 +73,12 @@
                     transformações profundas.
                 </p>
 
-                <a href="https://wa.me/5561991633033" class="botao-primario">
+                <a href="https://wa.me/5561991633033" class="botao-primario" target="_blank" rel="noopener noreferrer">
                     Agendar consulta
                 </a>
             </div>
 
-            <div class="hero-imagem">
+            <div class="hero-imagem" data-parallax="0.08">
                 <img src="img.jpg" alt="Foto profissional de Elisângela Jeane">
             </div>
         </div>
@@ -265,7 +271,7 @@
                 <div class="footer-cta">
                     <span class="cta-tag">Próximo Passo</span>
                     <h2 class="cta-title">Vamos decifrar sua história?</h2>
-                    <a href="https://wa.me/5561991633033" class="cta-link">
+                    <a href="https://wa.me/5561991633033" class="cta-link" target="_blank" rel="noopener noreferrer">
                         Agende uma consulta exploratória ⇨
                     </a>
                 </div>
@@ -328,6 +334,20 @@
 
     html {
         scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+    }
+
+    /* ================= SCROLL PROGRESSO ================= */
+
+    .scroll-progresso {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, var(--acento), var(--vinho));
+        z-index: 2000;
+        transition: width .1s linear;
     }
 
     body {
@@ -540,6 +560,33 @@
         justify-content: center;
         padding: 120px 24px;
         background: linear-gradient(120deg, var(--rosa-claro) 0%, var(--base) 75%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-forma {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, var(--rosa-medio), transparent 70%);
+        opacity: .55;
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .hero-forma-1 {
+        width: 420px;
+        height: 420px;
+        top: -140px;
+        right: -120px;
+    }
+
+    .hero-forma-2 {
+        width: 260px;
+        height: 260px;
+        bottom: -100px;
+        left: -80px;
+        background: radial-gradient(circle at 60% 40%, var(--acento), transparent 70%);
+        opacity: .25;
     }
 
     .hero .container {
@@ -549,6 +596,8 @@
         grid-template-columns: 1.2fr 1fr;
         gap: 60px;
         align-items: center;
+        position: relative;
+        z-index: 1;
     }
 
     .hero-texto {
@@ -611,6 +660,8 @@
         border-radius: 50%;
         box-shadow: 0 20px 50px rgba(92, 42, 49, 0.18);
         border: 6px solid var(--branco);
+        transition: transform .6s ease;
+        will-change: transform;
     }
 
     @media (max-width: 992px) {
@@ -1117,6 +1168,12 @@
             transition-duration: 0.001ms !important;
             scroll-behavior: auto !important;
         }
+
+        .hero-forma,
+        .hero-imagem,
+        .hero-imagem img {
+            transform: none !important;
+        }
     }
 </style>
 
@@ -1183,13 +1240,59 @@
         });
 
         const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+        const scrollProgresso = document.getElementById('scroll-progresso');
+        const parallaxEls = document.querySelectorAll('[data-parallax]');
+        const reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        let ticking = false;
+
+        function atualizarScroll() {
+            const scrollY = window.scrollY;
+
+            if (scrollY > 50) {
                 header.style.boxShadow = "0 10px 30px rgba(92, 42, 49, 0.08)";
             } else {
                 header.style.boxShadow = "none";
             }
+
+            if (scrollProgresso) {
+                const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+                const progresso = alturaTotal > 0 ? (scrollY / alturaTotal) * 100 : 0;
+                scrollProgresso.style.width = progresso + "%";
+            }
+
+            if (!reduzMovimento) {
+                parallaxEls.forEach(el => {
+                    const velocidade = parseFloat(el.dataset.parallax) || 0.1;
+                    el.style.transform = `translateY(${scrollY * velocidade}px)`;
+                });
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(atualizarScroll);
+                ticking = true;
+            }
         });
+
+        atualizarScroll();
+
+        const heroImg = document.querySelector('.hero-imagem img');
+        if (heroImg && !reduzMovimento) {
+            const heroImgWrapper = document.querySelector('.hero-imagem');
+            heroImgWrapper.addEventListener('mousemove', (e) => {
+                const rect = heroImgWrapper.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                heroImg.style.transform = `scale(1.03) translate(${x * 12}px, ${y * 12}px)`;
+            });
+            heroImgWrapper.addEventListener('mouseleave', () => {
+                heroImg.style.transform = 'scale(1) translate(0, 0)';
+            });
+        }
 
         const faqs = document.querySelectorAll('details');
         faqs.forEach(faq => {
