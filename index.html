@@ -73,7 +73,7 @@
                     transformações profundas.
                 </p>
 
-                <a href="https://wa.me/5561991633033" class="botao-primario" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5561991633033?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consulta%20de%20An%C3%A1lise%20Corporal%20com%20a%20Elis%C3%A2ngela%20Jeane." class="botao-primario" target="_blank" rel="noopener noreferrer">
                     Agendar consulta
                 </a>
             </div>
@@ -230,42 +230,54 @@
 
                 <details>
                     <summary>O que é Análise Corporal?</summary>
-                    <p>
-                        É um método que identifica padrões emocionais e comportamentais observando características do
-                        corpo.
-                    </p>
+                    <div class="faq-conteudo">
+                        <p>
+                            É um método que identifica padrões emocionais e comportamentais observando características
+                            do corpo.
+                        </p>
+                    </div>
                 </details>
                 <details>
                     <summary>Para que serve a análise corporal?</summary>
-                    <p>
-                        A qualquer pessoa interessada em autoconhecimento e desenvolvimento pessoa.
-                    </p>
+                    <div class="faq-conteudo">
+                        <p>
+                            A qualquer pessoa interessada em autoconhecimento e desenvolvimento pessoa.
+                        </p>
+                    </div>
                 </details>
                 <details>
                     <summary>Como isso ajuda?</summary>
-                    <p>
-                        Ajuda no autoconhecimento, clareza emocional e desenvolvimento pessoal.
-                    </p>
+                    <div class="faq-conteudo">
+                        <p>
+                            Ajuda no autoconhecimento, clareza emocional e desenvolvimento pessoal.
+                        </p>
+                    </div>
                 </details>
                 <details>
                     <summary>Benefícios</summary>
-                    <p>
-                        Autoconhecimento, clareza emocional, desenvolvimento pessoal, melhoria nos relacionamentos,
-                        reconhecimento de forças, potencialização de talentos, gestão emocional e fortalecimento da
-                        autoestima.
-                    </p>
+                    <div class="faq-conteudo">
+                        <p>
+                            Autoconhecimento, clareza emocional, desenvolvimento pessoal, melhoria nos relacionamentos,
+                            reconhecimento de forças, potencialização de talentos, gestão emocional e fortalecimento da
+                            autoestima.
+                        </p>
+                    </div>
                 </details>
 
                 <details>
                     <summary>Quanto tempo dura a sessão?</summary>
-                    <p>Entre 60 e 90 minutos, mas pode várias de casos em casos.</p>
+                    <div class="faq-conteudo">
+                        <p>Entre 60 e 90 minutos, mas pode várias de casos em casos.</p>
+                    </div>
                 </details>
 
                 <details>
                     <summary>É online?</summary>
-                    <p>
-                        Sim, pode ser realizada online ou presencialmente.
-                    </p>
+                    <div class="faq-conteudo">
+                        <p>
+                            Sim, pode ser realizada online ou presencialmente.
+                        </p>
+                    </div>
                 </details>
 
             </div>
@@ -279,7 +291,7 @@
                 <div class="footer-cta">
                     <span class="cta-tag">Próximo Passo</span>
                     <h2 class="cta-title">Vamos decifrar sua história?</h2>
-                    <a href="https://wa.me/5561991633033" class="cta-link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/5561991633033?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consulta%20de%20An%C3%A1lise%20Corporal%20com%20a%20Elis%C3%A2ngela%20Jeane." class="cta-link" target="_blank" rel="noopener noreferrer">
                         Agende uma consulta exploratória ⇨
                     </a>
                 </div>
@@ -325,7 +337,7 @@
 
     </footer>
 
-    <a href="https://wa.me/5561991633033" class="whatsapp-bolha" target="_blank" rel="noopener noreferrer"
+    <a href="https://wa.me/5561991633033?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consulta%20de%20An%C3%A1lise%20Corporal%20com%20a%20Elis%C3%A2ngela%20Jeane." class="whatsapp-bolha" target="_blank" rel="noopener noreferrer"
         aria-label="Falar no WhatsApp">
         <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true">
             <path
@@ -1087,7 +1099,18 @@
         transform: rotate(-135deg);
     }
 
-    details p {
+    .faq-conteudo {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height .5s cubic-bezier(.22,.61,.36,1), opacity .4s ease;
+    }
+
+    details[open] .faq-conteudo {
+        opacity: 1;
+    }
+
+    .faq-conteudo p {
         padding: 0 28px 24px 28px;
         font-size: 1rem;
         color: var(--suave);
@@ -1532,15 +1555,47 @@
             });
         }
 
-        const faqs = document.querySelectorAll('details');
+        const faqs = document.querySelectorAll('.faq-list details');
+
+        function fecharFaq(faq) {
+            const conteudo = faq.querySelector('.faq-conteudo');
+            if (!conteudo) return;
+            conteudo.style.maxHeight = conteudo.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+                conteudo.style.maxHeight = '0px';
+            });
+            const aoTerminar = () => {
+                faq.removeAttribute('open');
+                conteudo.removeEventListener('transitionend', aoTerminar);
+            };
+            conteudo.addEventListener('transitionend', aoTerminar);
+        }
+
+        function abrirFaq(faq) {
+            faq.setAttribute('open', '');
+            const conteudo = faq.querySelector('.faq-conteudo');
+            if (!conteudo) return;
+            conteudo.style.maxHeight = conteudo.scrollHeight + 'px';
+        }
+
         faqs.forEach(faq => {
-            faq.addEventListener('click', () => {
-                if (!faq.hasAttribute('open')) {
-                    faqs.forEach(otherFaq => {
-                        if (otherFaq !== faq) {
-                            otherFaq.removeAttribute('open');
-                        }
-                    });
+            const summary = faq.querySelector('summary');
+            if (!summary) return;
+
+            summary.addEventListener('click', (e) => {
+                e.preventDefault();
+                const estaAberto = faq.hasAttribute('open');
+
+                faqs.forEach(outraFaq => {
+                    if (outraFaq !== faq && outraFaq.hasAttribute('open')) {
+                        fecharFaq(outraFaq);
+                    }
+                });
+
+                if (estaAberto) {
+                    fecharFaq(faq);
+                } else {
+                    abrirFaq(faq);
                 }
             });
         });
