@@ -167,50 +167,58 @@
                 </p>
             </header>
 
-            <div class="cards-depoimentos">
+            <div class="depoimentos-carrossel-wrapper">
+                <button type="button" class="depoimentos-seta depoimentos-seta-esq" id="depoimentos-anterior"
+                    aria-label="Depoimento anterior">‹</button>
 
-                <article class="depoimento">
-                    <p>
-                        "A análise me trouxe clareza sobre minhas emoções. Hoje tomo decisões com mais segurança."
-                    </p>
-                    <span class="autor">— Ana Paula Cavalcante</span>
-                </article>
+                <div class="cards-depoimentos" id="cards-depoimentos" tabindex="0" aria-label="Depoimentos de clientes">
 
-                <article class="depoimento">
-                    <p>
-                        "Consegui entender melhor meus padrões e isso transformou minha rotina."
-                    </p>
-                    <span class="autor">— Emelly Barbosa</span>
-                </article>
+                    <article class="depoimento">
+                        <p>
+                            "A análise me trouxe clareza sobre minhas emoções. Hoje tomo decisões com mais segurança."
+                        </p>
+                        <span class="autor">— Ana Paula Cavalcante</span>
+                    </article>
 
-                <article class="depoimento">
-                    <p>
-                        "Passei a lidar com meus desafios de forma mais leve e consciente."
-                    </p>
-                    <span class="autor">— Rafael Costa</span>
-                </article>
+                    <article class="depoimento">
+                        <p>
+                            "Consegui entender melhor meus padrões e isso transformou minha rotina."
+                        </p>
+                        <span class="autor">— Emelly Barbosa</span>
+                    </article>
 
-                <article class="depoimento">
-                    <p>
-                        "Me ajudou a melhorar minha comunicação e meus relacionamentos."
-                    </p>
-                    <span class="autor">— Vanessa Ribeiro</span>
-                </article>
+                    <article class="depoimento">
+                        <p>
+                            "Passei a lidar com meus desafios de forma mais leve e consciente."
+                        </p>
+                        <span class="autor">— Rafael Costa</span>
+                    </article>
 
-                <article class="depoimento">
-                    <p>
-                        "Foi um processo revelador. Aprendi a respeitar meu próprio ritmo."
-                    </p>
-                    <span class="autor">— Lucas Fernandes</span>
-                </article>
+                    <article class="depoimento">
+                        <p>
+                            "Me ajudou a melhorar minha comunicação e meus relacionamentos."
+                        </p>
+                        <span class="autor">— Vanessa Ribeiro</span>
+                    </article>
 
-                <article class="depoimento">
-                    <p>
-                        "Foi um divisor de águas no meu processo de autoconhecimento."
-                    </p>
-                    <span class="autor">— Camila Rodrigues</span>
-                </article>
+                    <article class="depoimento">
+                        <p>
+                            "Foi um processo revelador. Aprendi a respeitar meu próprio ritmo."
+                        </p>
+                        <span class="autor">— Lucas Fernandes</span>
+                    </article>
 
+                    <article class="depoimento">
+                        <p>
+                            "Foi um divisor de águas no meu processo de autoconhecimento."
+                        </p>
+                        <span class="autor">— Camila Rodrigues</span>
+                    </article>
+
+                </div>
+
+                <button type="button" class="depoimentos-seta depoimentos-seta-dir" id="depoimentos-proximo"
+                    aria-label="Próximo depoimento">›</button>
             </div>
         </div>
     </section>
@@ -283,7 +291,7 @@
 
                 <div class="footer-col brand">
                     <span class="logo-main">Elisângela Jeane</span>
-                    <p class="brand-text">Abordagem científica e humana.</p>
+                    <p class="brand-text">Abordagem científica e humana para o autoconhecimento através do corpo.</p>
                 </div>
 
                 <div class="footer-col links">
@@ -293,6 +301,19 @@
                         <li><a href="#sobre">O Método</a></li>
                         <li><a href="#servicos">Benefícios</a></li>
                         <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#faq">Dúvidas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col contato">
+                    <h4 class="col-label">Contato</h4>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="https://wa.me/5561991633033" target="_blank" rel="noopener noreferrer">
+                                WhatsApp: (61) 99163-3033
+                            </a>
+                        </li>
+                        <li>Atendimento online ou presencial</li>
                     </ul>
                 </div>
 
@@ -335,6 +356,7 @@
     html {
         scroll-behavior: smooth;
         scroll-padding-top: 90px;
+        overflow-x: hidden;
     }
 
     /* ================= SCROLL PROGRESSO ================= */
@@ -355,6 +377,7 @@
         color: var(--texto);
         font-family: var(--font-corpo);
         line-height: 1.6;
+        overflow-x: hidden;
     }
 
     a {
@@ -815,7 +838,7 @@
         border-radius: 6px;
         display: flex;
         align-items: center;
-        transition: background-color .35s ease, transform .35s ease;
+        transition: background-color .4s cubic-bezier(.22,.61,.36,1), transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease;
         border-left: 3px solid transparent;
     }
 
@@ -823,6 +846,20 @@
         background-color: var(--rosa-medio);
         transform: translateX(8px);
         border-left-color: var(--vinho);
+        box-shadow: 0 10px 24px rgba(92, 42, 49, 0.08);
+    }
+
+    /* ================= REVEAL-ON-SCROLL (classes, não inline) ================= */
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .reveal.visivel {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .lista-beneficios li::before {
@@ -859,23 +896,48 @@
         margin-top: 12px;
     }
 
+    .depoimentos-carrossel-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
     .cards-depoimentos {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        display: flex;
         gap: 28px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 12px 4px 28px;
+        margin: 0 -4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--rosa-medio) transparent;
+    }
+
+    .cards-depoimentos::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .cards-depoimentos::-webkit-scrollbar-thumb {
+        background: var(--rosa-medio);
+        border-radius: 10px;
     }
 
     .depoimento {
         background: var(--branco);
         padding: 36px;
-        border-radius: 6px;
+        border-radius: 8px;
         border: 1px solid rgba(92, 42, 49, 0.06);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: transform .4s ease, box-shadow .4s ease;
+        transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s cubic-bezier(.22,.61,.36,1), border-color .45s ease;
         position: relative;
         overflow: hidden;
+        flex: 0 0 340px;
+        scroll-snap-align: start;
     }
 
     .depoimento::before {
@@ -887,11 +949,19 @@
         color: var(--vinho);
         opacity: .06;
         font-family: var(--font-titulo);
+        transition: opacity .45s ease, transform .45s ease;
     }
 
-    .depoimento:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 20px 40px rgba(92, 42, 49, 0.1);
+    .depoimento:hover,
+    .depoimento:focus-within {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 24px 48px rgba(92, 42, 49, 0.14);
+        border-color: var(--rosa-medio);
+    }
+
+    .depoimento:hover::before {
+        opacity: .12;
+        transform: scale(1.08);
     }
 
     .depoimento p {
@@ -912,9 +982,37 @@
         letter-spacing: 1.2px;
     }
 
+    .depoimentos-seta {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--rosa-medio);
+        background: var(--branco);
+        color: var(--vinho);
+        font-size: 1.5rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color .35s ease, color .35s ease, transform .35s ease, box-shadow .35s ease;
+    }
+
+    .depoimentos-seta:hover {
+        background-color: var(--vinho);
+        color: #fff;
+        transform: scale(1.08);
+        box-shadow: 0 10px 24px rgba(92, 42, 49, 0.18);
+    }
+
     @media (max-width: 768px) {
-        .cards-depoimentos {
-            grid-template-columns: 1fr;
+        .depoimentos-seta {
+            display: none;
+        }
+
+        .depoimento {
+            flex-basis: 82vw;
         }
     }
 
@@ -1048,7 +1146,7 @@
 
     .footer-content {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1.6fr 1fr 1fr;
         gap: 40px;
     }
 
@@ -1056,6 +1154,10 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .brand-text {
+        max-width: 320px;
     }
 
     .logo-main {
@@ -1081,16 +1183,24 @@
         margin-bottom: 8px;
     }
 
+    .nav-list li {
+        color: #EADCDA;
+        font-size: .95rem;
+    }
+
     .nav-list a {
         color: #EADCDA;
         text-decoration: none;
         font-size: .95rem;
-        transition: color .3s ease, padding-left .3s ease;
+        transition: color .35s cubic-bezier(.22,.61,.36,1), padding-left .35s cubic-bezier(.22,.61,.36,1);
+        display: inline-block;
+        position: relative;
     }
 
-    .nav-list a:hover {
+    .nav-list a:hover,
+    .nav-list a:focus-visible {
         color: var(--rosa-medio);
-        padding-left: 4px;
+        padding-left: 6px;
     }
 
     .footer-base {
@@ -1121,6 +1231,10 @@
 
         .footer-content {
             grid-template-columns: 1fr 1fr;
+        }
+
+        .footer-col.brand {
+            grid-column: 1 / -1;
         }
     }
 
@@ -1221,8 +1335,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
+                    entry.target.classList.add('visivel');
                     observer.unobserve(entry.target);
                 }
             });
@@ -1232,10 +1345,9 @@
             '.sobre-container h2, .sobre-container p, .depoimento, .lista-beneficios li'
         );
 
-        animatableElements.forEach(el => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            el.style.transition = "all 0.8s ease-out";
+        animatableElements.forEach((el, index) => {
+            el.classList.add('reveal');
+            el.style.transitionDelay = `${Math.min(index % 6, 6) * 0.06}s`;
             observer.observe(el);
         });
 
@@ -1291,6 +1403,25 @@
             });
             heroImgWrapper.addEventListener('mouseleave', () => {
                 heroImg.style.transform = 'scale(1) translate(0, 0)';
+            });
+        }
+
+        const carrossel = document.getElementById('cards-depoimentos');
+        const btnAnterior = document.getElementById('depoimentos-anterior');
+        const btnProximo = document.getElementById('depoimentos-proximo');
+
+        if (carrossel && btnAnterior && btnProximo) {
+            const passo = () => {
+                const card = carrossel.querySelector('.depoimento');
+                return card ? card.getBoundingClientRect().width + 28 : 340;
+            };
+
+            btnAnterior.addEventListener('click', () => {
+                carrossel.scrollBy({ left: -passo(), behavior: 'smooth' });
+            });
+
+            btnProximo.addEventListener('click', () => {
+                carrossel.scrollBy({ left: passo(), behavior: 'smooth' });
             });
         }
 
